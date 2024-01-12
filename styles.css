@@ -1,0 +1,48 @@
+.root{
+    border: black solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vh;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    border: red solid;
+    height: 60vh;
+    width: 50vh;
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12pt;
+    border: blue solid;
+}
+
+.score{
+    border: yellow solid;
+}
+
+.winner{
+    display: flex;
+    flex-direction: column;
+    border: green solid;
+}
+
+.button-control{
+    display: flex;
+    border: pink solid;
+    justify-content: space-around;
+    flex-grow: 1;
+    padding-bottom: 10px;
+}
+
+.button-control button{
+    align-self: flex-end;
+    max-width: 75px;
+
+}
