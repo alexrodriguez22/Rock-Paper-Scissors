@@ -47,30 +47,31 @@ function getComputerChoice(){
 var computerScore = 0;
 var playerScore = 0;
 
+function playGame(){
+  while(computerScore < 3 && playerScore < 3){
 
-while(computerScore < 3 && playerScore < 3){
+    // get user input
+    let userResponse = prompt('Make your choice: ').toUpperCase();
+    let computerResponse = getComputerChoice();
 
-  // get user input
-  let userResponse = prompt('Make your choice: ').toUpperCase();
-  let computerResponse = getComputerChoice();
+    let round = playRound(userResponse, computerResponse);
 
-  let round = playRound(userResponse, computerResponse);
-
-  switch(round){
-    case 1: playerScore ++;
-    console.log('Player Wins!');
-    break;
-
-
-    case 2: computerScore ++;
-    console.log('Computer Wins!');
-    break;
-
-
-    case 0:
-      console.log('You Tied!');
+    switch(round){
+      case 1: playerScore ++;
+      console.log('Player Wins!');
       break;
 
+
+      case 2: computerScore ++;
+      console.log('Computer Wins!');
+      break;
+
+
+      case 0:
+        console.log('You Tied!');
+        break;
+
+    }
   }
 }
 
@@ -80,3 +81,13 @@ while(computerScore < 3 && playerScore < 3){
   } else{
     console.log('Computer Wins the game!');
   }
+
+  // store all buttons
+  const buttons = document.querySelectorAll('button');
+
+
+  // set event listener for each button
+  buttons.forEach(button => {
+    button.addEventListener('click', function() {
+    });
+});
