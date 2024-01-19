@@ -80,7 +80,8 @@ function updateGame(playerChoice) {
     if (playerScore >= 3 || computerScore >= 3) {
       var winnerDiv = document.querySelector('#winner');
     
-    
+      // Clear previous winner message
+      winnerDiv.innerHTML = '';
   
       var content = document.createElement('h3');
       content.classList.add('content');
