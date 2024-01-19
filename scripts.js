@@ -1,33 +1,6 @@
-function playRound(playerSelection, computerSelection) {
-    let winner = null;
-    if(playerSelection === computerSelection){
-      return 0;
-    }
-    switch(playerSelection){
-      case 'ROCK': 
-      if(computerSelection ===  'SCISSORS'){
-        return 1;
-      } else{
-        return 2;
-      }
-
-      case 'SCISSORS':
-        if(computerSelection === "PAPER"){
-          return 1;
-        } else{
-          return 2; 
-        }
-
-        case 'PAPER':
-          if(computerSelection === 'ROCK'){
-            return 1;
-          } else{
-            return 2; 
-          }
-    }
-
-  }
-
+var computerScore = 0;
+var playerScore = 0;
+  
   // function to return computers choice
 function getComputerChoice(){
     // assign random number bw 1 / 3
@@ -41,53 +14,104 @@ function getComputerChoice(){
         return "SCISSORS";
     }
 }
-   
-
-
-var computerScore = 0;
-var playerScore = 0;
-
-function playGame(){
-  while(computerScore < 3 && playerScore < 3){
-
-    // get user input
-    let userResponse = prompt('Make your choice: ').toUpperCase();
-    let computerResponse = getComputerChoice();
-
-    let round = playRound(userResponse, computerResponse);
-
-    switch(round){
-      case 1: playerScore ++;
-      console.log('Player Wins!');
-      break;
-
-
-      case 2: computerScore ++;
-      console.log('Computer Wins!');
-      break;
-
-
-      case 0:
-        console.log('You Tied!');
-        break;
-
-    }
+  
+function playRound(playerSelection, computerSelection) {
+  if(playerSelection === computerSelection){
+    return 0;
   }
+  switch(playerSelection){
+    case 'ROCK': 
+    if(computerSelection ===  'SCISSORS'){
+      return 1;
+    } else{
+      return 2;
+    }
+
+    case 'SCISSORS':
+      if(computerSelection === "PAPER"){
+        return 1;
+      } else{
+        return 2; 
+      }
+
+      case 'PAPER':
+        if(computerSelection === 'ROCK'){
+          return 1;
+        } else{
+          return 2; 
+        }
+  }
+
 }
 
+function displayScores() {
 
-  if(playerScore > computerScore){
-    console.log('Player Wins the game!');
-  } else{
-    console.log('Computer Wins the game!');
-  }
+  const playerScoreSpan = document.getElementById('playerScore');
+  const computerScoreSpan = document.getElementById('computerScore');
 
-  // store all buttons
-  const buttons = document.querySelectorAll('button');
+  playerScoreSpan.textContent = playerScore;
+  computerScoreSpan.textContent = computerScore;
 
+  console.log(`Player Score: ${playerScore}, Computer Score: ${computerScore}`);
+}
+  
+// Function to update scores and display results
+function updateGame(playerChoice) {
+    let computerChoice = getComputerChoice();
+    let roundResult = playRound(playerChoice.toUpperCase(), computerChoice);
 
-  // set event listener for each button
-  buttons.forEach(button => {
-    button.addEventListener('click', function() {
+    switch(roundResult) {
+        case 1:
+            playerScore++;
+            console.log('Player Wins!');
+            break;
+        case 2:
+            computerScore++;
+            console.log('Computer Wins!');
+            break;
+        case 0:
+            console.log('You Tied!');
+            break;
+    }
+
+    displayScores(); // Display current scores after each round
+
+    // Check if the game has ended
+    if (playerScore >= 3 || computerScore >= 3) {
+      var winnerDiv = document.querySelector('#winner');
+    
+    
+  
+      var content = document.createElement('h3');
+      content.classList.add('content');
+  
+      if(playerScore > computerScore){
+        content.textContent = 'Player is the winner!';
+      } else {
+        content.textContent ='Computer is the winner!';
+      }
+  
+      // Append the new winner message
+      winnerDiv.appendChild(content);
+    }
+}
+  // Function to start the game
+function playGame() {
+    // Get all buttons
+    const buttons = document.querySelectorAll('button');
+
+    // Set event listener for each button
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (playerScore < 3 && computerScore < 3) {
+                updateGame(this.textContent); 
+            }
+        });
     });
-});
+}
+
+// main
+
+playGame();
+  
+
